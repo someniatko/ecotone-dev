@@ -841,12 +841,6 @@ final class MessagingSystemConfiguration implements Configuration
 
     public static function prepareCacheDirectory(ServiceCacheConfiguration $serviceCacheConfiguration): void
     {
-        if (! $serviceCacheConfiguration->shouldUseCache()) {
-            /** We need to clean, in case stale cache exists. So enabling cache will generate fresh one */
-            self::cleanCache($serviceCacheConfiguration);
-            return;
-        }
-
         $cacheDirectoryPath = $serviceCacheConfiguration->getPath();
         if (! is_dir($cacheDirectoryPath)) {
             $mkdirResult = @mkdir($cacheDirectoryPath, 0775, true);
